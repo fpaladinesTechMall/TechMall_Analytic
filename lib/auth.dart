@@ -112,7 +112,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                               'Techmall Analytic',
                               style: FlutterFlowTheme.of(context).displaySmall.override(
                                     fontFamily: 'Plus Jakarta Sans',
-                                    color: Color(0xFF101213),
+                                    color: Color.fromARGB(255, 13, 15, 16),
                                     fontSize: 36,
                                     fontWeight: FontWeight.w600,
                                   ),
