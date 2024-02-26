@@ -122,7 +122,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                         Align(
                           alignment: AlignmentDirectional(0, 0),
                           child: Padding(
-                            padding: EdgeInsets.all(32),
+                            padding: EdgeInsets.all(31),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               crossAxisAlignment: CrossAxisAlignment.start,
