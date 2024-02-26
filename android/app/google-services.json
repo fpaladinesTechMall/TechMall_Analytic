@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "703762887981",
+    "firebase_url": "https://techmall-analytic-default-rtdb.firebaseio.com",
+    "project_id": "techmall-analytic",
+    "storage_bucket": "techmall-analytic.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:703762887981:android:b49963a07684f1793f0fa4",
+        "android_client_info": {
+          "package_name": "com.mycompany.techmallanalytic"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFUtstQfRVoqGg436J8nS6oPEBCNb0HbA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
