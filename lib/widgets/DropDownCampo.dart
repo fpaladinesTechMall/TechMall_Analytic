@@ -51,6 +51,7 @@ class _CampoWidgetState extends State<CampoWidget> {
             if (provider.hacienda2 != "") {
               campoSeleccionado = provider.hacienda2;
             }
+
             return DropdownButton<String>(
               value: campoSeleccionado, // Asegúrate de que este valor está en 'lotes'
               //Actualizar la informacion dado que obtiene el primer valor mas no el cambio
@@ -58,6 +59,8 @@ class _CampoWidgetState extends State<CampoWidget> {
               onChanged: (String? newValue) {
                 //provider.setlote(lotes!.first);
                 provider.sethacienda2(newValue!);
+                provider.sethacienda(newValue);
+
                 setState(() {
                   campoSeleccionado = newValue;
                 });

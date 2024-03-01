@@ -8,7 +8,7 @@ class VariablesExt with ChangeNotifier {
     notifyListeners();
   }
 
-  String _correo = "GonzaloQuintana@techmall.com";
+  String _correo = "";
   String get correo => _correo;
   void setcorreo(String newcorreo) {
     _correo = newcorreo;

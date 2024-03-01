@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:techmall_analytic/Color/ColorWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:techmall_analytic/provider/variablesExt.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({Key? key}) : super(key: key);
@@ -17,12 +19,16 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void _signIn() async {
+  void _signIn(provider) async {
     try {
       final UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _model.direccionCorreoController.text,
         password: _model.contrasenaController.text,
       );
+
+      provider.setcorreo(_model.direccionCorreoController.text);
+      print(provider.correo);
+
       Navigator.pushNamed(context, "/Dashboard");
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -58,6 +64,8 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<VariablesExt>(context, listen: true);
+
     if (isiOS) {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
@@ -294,7 +302,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                   child: FFButtonWidget(
                                     onPressed: () {
-                                      _signIn();
+                                      _signIn(provider);
                                     },
                                     text: 'Ingresar',
                                     options: FFButtonOptions(
