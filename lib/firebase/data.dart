@@ -46,3 +46,8 @@ Future<List<String>> obtenerDocumentosDeSubcoleccion(usuario, hacienda, lote) as
   List<String> nombres = querySnapshot.docs.map((doc) => doc['Informacion'] as String).toList();
   return nombres;
 }
+
+Future<List<Map<String, dynamic>>> obtenerReportes(id) async {
+  QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('Correo/$id/Reporte').get();
+  return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+}

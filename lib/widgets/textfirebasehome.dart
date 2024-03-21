@@ -10,9 +10,7 @@ class DataServiceCampo {
 
   Future<List<Map<String, dynamic>>> getData() async {
     QuerySnapshot snapshot = await _firestore.collection('Campo').get();
-    return snapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
+    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
   }
 }
 
@@ -20,11 +18,8 @@ class DataServiceLote {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<Map<String, dynamic>>> getData() async {
-    QuerySnapshot snapshot =
-        await _firestore.collection('/Campo/zWkmZT0wQQfnHd509SHd/Lote').get();
-    return snapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
+    QuerySnapshot snapshot = await _firestore.collection('/Campo/zWkmZT0wQQfnHd509SHd/Lote').get();
+    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
   }
 }
 
@@ -32,13 +27,9 @@ class DataServiceFecha {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<Map<String, dynamic>>> getData() async {
-    QuerySnapshot snapshot = await _firestore
-        .collection(
-            '/Campo/zWkmZT0wQQfnHd509SHd/Lote/NdWGolLHIN5VkwX3IObW/Fecha')
-        .get();
-    return snapshot.docs
-        .map((doc) => doc.data() as Map<String, dynamic>)
-        .toList();
+    QuerySnapshot snapshot =
+        await _firestore.collection('/Campo/zWkmZT0wQQfnHd509SHd/Lote/NdWGolLHIN5VkwX3IObW/Fecha').get();
+    return snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
   }
 }
 
@@ -59,8 +50,7 @@ class DataDisplay extends StatelessWidget {
             itemBuilder: (context, index) {
               print(snapshot.data);
               return ListTile(
-                title: Text(
-                    'Item ${index + 1}: ${snapshot.data![index]['Nombre']}'),
+                title: Text('Item ${index + 1}: ${snapshot.data![index]['Nombre']}'),
               );
             },
           );
@@ -79,20 +69,17 @@ class _DataDisplayFechaState extends State<DataDisplayFecha> {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String? loteSeleccionado;
-  Future<List<Timestamp>> obtenerDocumentosDeSubcoleccion(
-      hacienda, lote) async {
+  Future<List<Timestamp>> obtenerDocumentosDeSubcoleccion(correo, hacienda, lote) async {
     QuerySnapshot querySnapshot = await _firestore
         .collection('Usuario')
-        .doc(
-            'GonzaloQuintana@techmall.com') // Sustituye esto por el ID real de tu documento
+        .doc(correo) // Sustituye esto por el ID real de tu documento
         .collection('Hacienda')
         .doc(hacienda)
         .collection('Lote')
         .doc(lote)
         .collection('Fecha')
         .get();
-    List<Timestamp> nombres =
-        querySnapshot.docs.map((doc) => doc['Fecha'] as Timestamp).toList();
+    List<Timestamp> nombres = querySnapshot.docs.map((doc) => doc['Fecha'] as Timestamp).toList();
     return nombres;
   }
 
@@ -102,7 +89,7 @@ class _DataDisplayFechaState extends State<DataDisplayFecha> {
     var provider = Provider.of<VariablesExt>(context, listen: true);
 
     return FutureBuilder(
-      future: obtenerDocumentosDeSubcoleccion(provider.hacienda, provider.lote),
+      future: obtenerDocumentosDeSubcoleccion(provider.correo, provider.hacienda, provider.lote),
       builder: (BuildContext context, AsyncSnapshot<List<Timestamp>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Container();
@@ -116,11 +103,8 @@ class _DataDisplayFechaState extends State<DataDisplayFecha> {
               return Container(
                 margin: EdgeInsets.only(right: 10.0),
                 decoration: BoxDecoration(
-                  color: selectedIndexes.contains(index)
-                      ? Colors.black.withOpacity(0.2)
-                      : null,
-                  borderRadius: BorderRadius.circular(
-                      10.0), // Ajusta el radio según tus preferencias
+                  color: selectedIndexes.contains(index) ? Colors.black.withOpacity(0.5) : null,
+                  borderRadius: BorderRadius.circular(15.0), // Ajusta el radio según tus preferencias
                 ),
                 child: InkWell(
                   onTap: () {
@@ -143,7 +127,7 @@ class _DataDisplayFechaState extends State<DataDisplayFecha> {
                         '${DateFormat.MMMM('es').format(snapshot.data![index].toDate())}',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
-                              fontSize: 9,
+                              fontSize: 11,
                             ),
                       ),
                       Text(
@@ -154,7 +138,7 @@ class _DataDisplayFechaState extends State<DataDisplayFecha> {
                         '${snapshot.data![index].toDate().year}',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
-                              fontSize: 12,
+                              fontSize: 13,
                             ),
                       ),
                     ],

@@ -1,9 +1,11 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:techmall_analytic/Reporte.dart';
 import 'package:techmall_analytic/Screens/FormularioIngreso.dart';
 import 'package:techmall_analytic/Screens/PruebaSubida.dart';
 import 'package:techmall_analytic/Screens/UnKnowbPage.dart';
+import 'package:techmall_analytic/Site/historial.dart';
 import 'package:techmall_analytic/auth.dart';
 import 'package:techmall_analytic/firebase/firebase_options.dart';
 import 'package:techmall_analytic/home.dart';
@@ -33,10 +35,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VariablesExt()),
       ],
       child: MaterialApp(
-        initialRoute: "/Auth",
+        initialRoute: "/Reportes",
         routes: {
           "/Auth": (context) => AuthWidget(),
           "/Dashboard": (context) => HomePageWidget(),
+          "/Historial": (context) => HistorialWidget(),
+          "/Reportes": (context) => Reportes(),
         },
         onGenerateRoute: (settings) {
           final user = FirebaseAuth.instance.currentUser;
@@ -53,6 +57,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (context) => AuthWidget());
             case '/Dashboard':
               return MaterialPageRoute(builder: (context) => HomePageWidget());
+            case '/Historial':
+              return MaterialPageRoute(builder: (context) => HistorialWidget());
             default:
               // Implementa una página de error o desconocida como fallback
               return MaterialPageRoute(builder: (context) => UnknownPage());

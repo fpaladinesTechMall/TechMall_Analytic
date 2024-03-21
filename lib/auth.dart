@@ -5,6 +5,7 @@ import 'package:techmall_analytic/Color/ColorWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:techmall_analytic/provider/variablesExt.dart';
+import 'package:techmall_analytic/widgets/ImagenRotativa.dart';
 
 class AuthWidget extends StatefulWidget {
   const AuthWidget({Key? key}) : super(key: key);
@@ -373,23 +374,7 @@ class _AuthWidgetState extends State<AuthWidget> {
               ))
                 Expanded(
                   flex: 6,
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Container(
-                      width: 100,
-                      height: double.infinity,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        image: DecorationImage(
-                          fit: BoxFit.fitHeight,
-                          image: Image.asset(
-                            'assets/FondoAuth.png',
-                          ).image,
-                        ),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                    ),
-                  ),
+                  child: ImagenRotativa(),
                 ),
             ],
           ),

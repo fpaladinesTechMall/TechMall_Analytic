@@ -8,7 +8,7 @@ class VariablesExt with ChangeNotifier {
     notifyListeners();
   }
 
-  String _correo = "";
+  String _correo = "frearpal@outlook.com";
   String get correo => _correo;
   void setcorreo(String newcorreo) {
     _correo = newcorreo;
@@ -47,6 +47,13 @@ class VariablesExt with ChangeNotifier {
   String get fecha => _fecha;
   void setfecha(String newfecha) {
     _fecha = newfecha;
+    notifyListeners();
+  }
+
+  String _indice = "NDVI"; // URL predeterminado
+  String get indice => _indice;
+  void setindice(String newindice) {
+    _indice = newindice;
     notifyListeners();
   }
 }

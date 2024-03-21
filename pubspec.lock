@@ -338,7 +338,7 @@ packages:
     source: hosted
     version: "3.7.0"
   fl_chart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: fl_chart
       sha256: cf46edb10b096dc6197e561f6bb7929371baaaff2bca7848982670a152e3d23f
@@ -813,6 +813,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.7.4"
+  progressive_image:
+    dependency: "direct main"
+    description:
+      name: progressive_image
+      sha256: "62f3f4d01e5ee5f08827d45df2bac4f4df702034fe0de0c56bbf3afd4925817d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   provider:
     dependency: transitive
     description:

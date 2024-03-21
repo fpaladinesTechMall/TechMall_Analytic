@@ -1,0 +1,2 @@
+width: MediaQuery.sizeOf(context).width * 0.55,
+height: MediaQuery.sizeOf(context).height * 0.06,

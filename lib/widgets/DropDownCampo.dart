@@ -6,9 +6,11 @@ import 'package:techmall_analytic/provider/variablesExt.dart';
 
 class CampoWidget extends StatefulWidget {
   final String campoInicial;
+  final String correodata;
   const CampoWidget({
     super.key,
     required this.campoInicial,
+    required this.correodata,
   });
 
   @override
@@ -22,7 +24,7 @@ class _CampoWidgetState extends State<CampoWidget> {
   Future<List<String>> obtenerDocumentosDeSubcoleccion() async {
     QuerySnapshot querySnapshot = await _firestore
         .collection('Usuario')
-        .doc('GonzaloQuintana@techmall.com') // Sustituye esto por el ID real de tu documento
+        .doc(widget.correodata) // Sustituye esto por el ID real de tu documento
         .collection('Hacienda') // Sustituye esto por el nombre de tu subcolección
         .get();
     List<String> nombres = querySnapshot.docs.map((doc) => doc['Nombre'] as String).toList();
