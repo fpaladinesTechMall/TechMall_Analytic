@@ -4,10 +4,8 @@ import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:techmall_analytic/Color/ColorWidget.dart';
 import 'package:techmall_analytic/firebase/data.dart';
 import 'package:techmall_analytic/provider/variablesExt.dart';
-
 import 'package:techmall_analytic/widgets/DropDownCampo.dart';
 import 'package:techmall_analytic/widgets/DropDownLote.dart';
-
 import 'package:techmall_analytic/widgets/MenuUsuario.dart';
 import 'package:techmall_analytic/widgets/MenuWidget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

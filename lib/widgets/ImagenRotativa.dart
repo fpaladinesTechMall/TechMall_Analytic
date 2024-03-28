@@ -26,6 +26,7 @@ class _ImagenRotativaState extends State<ImagenRotativa> with SingleTickerProvid
   ];
   late AnimationController _controller;
   late Animation<double> _animation;
+  Timer? _timer; // Declara una variable para el timer
 
   @override
   void initState() {
@@ -39,13 +40,16 @@ class _ImagenRotativaState extends State<ImagenRotativa> with SingleTickerProvid
     // Iniciar animación al inicio
     _controller.forward();
 
-    Timer.periodic(Duration(seconds: 15), (timer) {
-      setState(() {
-        _currentIndex++;
-        if (_currentIndex == _imageList.length) _currentIndex = 0;
-        _controller.reset();
-        _controller.forward();
-      });
+    _timer = Timer.periodic(Duration(seconds: 15), (timer) {
+      // Asegúrate de que el widget todavía esté montado antes de llamar a setState
+      if (mounted) {
+        setState(() {
+          _currentIndex++;
+          if (_currentIndex == _imageList.length) _currentIndex = 0;
+          _controller.reset();
+          _controller.forward();
+        });
+      }
     });
   }
 

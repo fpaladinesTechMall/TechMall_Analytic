@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
 import 'package:techmall_analytic/Color/ColorWidget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:techmall_analytic/Navigate/navigateWithLoading.dart';
 import 'package:techmall_analytic/provider/variablesExt.dart';
 import 'package:techmall_analytic/widgets/ImagenRotativa.dart';
 
@@ -17,20 +19,27 @@ class AuthWidget extends StatefulWidget {
 class _AuthWidgetState extends State<AuthWidget> {
   late AuthModel _model;
   String _errorMessage = '';
-
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
   void _signIn(provider) async {
     try {
       final UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _model.direccionCorreoController.text,
         password: _model.contrasenaController.text,
       );
-
       provider.setcorreo(_model.direccionCorreoController.text);
-      print(provider.correo);
-
-      Navigator.pushNamed(context, "/Dashboard");
+      DocumentSnapshot userDoc =
+          await _firestore.collection('Usuario').doc(_model.direccionCorreoController.text).get();
+      String tipoUsuario = userDoc['Tipo'];
+      String nombreUsuario = userDoc['Nombre'];
+      provider.setnombreUsuario(nombreUsuario);
+      if (tipoUsuario == 'Admin') {
+        // Navegar a la pantalla de Administrador
+        Navigator.pushNamed(context, "/Fomulario");
+      } else {
+        // Navegar a la pantalla de Consultor
+        navigateWithLoading(context);
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -66,7 +75,6 @@ class _AuthWidgetState extends State<AuthWidget> {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<VariablesExt>(context, listen: true);
-
     if (isiOS) {
       SystemChrome.setSystemUIOverlayStyle(
         SystemUiOverlayStyle(
@@ -75,7 +83,6 @@ class _AuthWidgetState extends State<AuthWidget> {
         ),
       );
     }
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -226,6 +233,10 @@ class _AuthWidgetState extends State<AuthWidget> {
                                       controller: _model.contrasenaController,
                                       focusNode: _model.contrasenaFocusNode,
                                       autofocus: true,
+                                      onFieldSubmitted: (value) {
+                                        // Aquí defines qué hacer cuando el usuario presione enter
+                                        _signIn(provider);
+                                      },
                                       autofillHints: [AutofillHints.password],
                                       obscureText: !_model.contrasenaVisibility,
                                       decoration: InputDecoration(
@@ -329,7 +340,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                                 ),
 
                                 // You will have to add an action on this rich text to go to your login page.
-                                Padding(
+                                /* Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                                   child: RichText(
                                     textScaleFactor: MediaQuery.of(context).textScaleFactor,
@@ -357,7 +368,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                                           ),
                                     ),
                                   ),
-                                ),
+                                ), */
                               ],
                             ),
                           ),

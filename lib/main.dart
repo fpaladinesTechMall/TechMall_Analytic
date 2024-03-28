@@ -1,14 +1,15 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:techmall_analytic/Reporte.dart';
 import 'package:techmall_analytic/Screens/FormularioIngreso.dart';
-import 'package:techmall_analytic/Screens/PruebaSubida.dart';
+import 'package:techmall_analytic/Site/adm/PagSubirData/FormularioData.dart';
 import 'package:techmall_analytic/Screens/UnKnowbPage.dart';
+import 'package:techmall_analytic/Site/adm/enviarInfMap.dart';
 import 'package:techmall_analytic/Site/historial.dart';
-import 'package:techmall_analytic/auth.dart';
+import 'package:techmall_analytic/Site/auth.dart';
+import 'package:techmall_analytic/Site/reporte.dart';
 import 'package:techmall_analytic/firebase/firebase_options.dart';
-import 'package:techmall_analytic/home.dart';
+import 'package:techmall_analytic/Site/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
@@ -35,12 +36,13 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => VariablesExt()),
       ],
       child: MaterialApp(
-        initialRoute: "/Reportes",
+        initialRoute: "/Auth",
         routes: {
           "/Auth": (context) => AuthWidget(),
           "/Dashboard": (context) => HomePageWidget(),
           "/Historial": (context) => HistorialWidget(),
           "/Reportes": (context) => Reportes(),
+          "/Fomulario": (context) => EnviarDataMap(),
         },
         onGenerateRoute: (settings) {
           final user = FirebaseAuth.instance.currentUser;
@@ -57,6 +59,8 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (context) => AuthWidget());
             case '/Dashboard':
               return MaterialPageRoute(builder: (context) => HomePageWidget());
+            case '/Fomulario':
+              return MaterialPageRoute(builder: (context) => EnviarDataMap());
             case '/Historial':
               return MaterialPageRoute(builder: (context) => HistorialWidget());
             default:

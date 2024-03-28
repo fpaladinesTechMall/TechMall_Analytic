@@ -20,8 +20,6 @@ class ImagenHomePrincipalWeb extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(".............................................xx..............................................");
-    print(urlRGB);
     var ancho = MediaQuery.sizeOf(context).width;
     var alto = MediaQuery.sizeOf(context).height;
     var storageRefNDVI = FirebaseStorage.instance.ref().child(urlNDVI).getDownloadURL();
@@ -95,8 +93,6 @@ class _ImagenCentroState extends State<ImagenCentro> {
 
   @override
   void initState() {
-    print(".............................................xx..............................................");
-    print(widget.url);
     super.initState();
     _transformationController = TransformationController();
     _interactiveViewer = InteractiveViewer(

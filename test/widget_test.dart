@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:techmall_analytic/auth.dart';
+import 'package:techmall_analytic/Site/auth.dart';
 
 import 'package:techmall_analytic/main.dart';
 

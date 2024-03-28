@@ -56,4 +56,11 @@ class VariablesExt with ChangeNotifier {
     _indice = newindice;
     notifyListeners();
   }
+
+  String _nombreUsuario = ""; // URL predeterminado
+  String get nombreUsuario => _nombreUsuario;
+  void setnombreUsuario(String newnombreUsuario) {
+    _nombreUsuario = newnombreUsuario;
+    notifyListeners();
+  }
 }

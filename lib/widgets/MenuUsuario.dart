@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutterflow_ui/flutterflow_ui.dart';
+import 'package:techmall_analytic/firebase/cerrarSeccion.dart';
+import 'package:techmall_analytic/provider/variablesExt.dart';
+import 'package:provider/provider.dart';
 
 class MenuUsuario extends StatefulWidget {
   const MenuUsuario({super.key});
@@ -11,13 +14,15 @@ class MenuUsuario extends StatefulWidget {
 class _MenuUsuarioState extends State<MenuUsuario> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<VariablesExt>(context, listen: true);
+
     return Row(
       mainAxisSize: MainAxisSize.min, // Importante para evitar que el Row ocupe más espacio del necesario
       children: [
         CircleAvatar(
           backgroundColor: Colors.white,
           backgroundImage: NetworkImage(
-              'https://lapi.com.mx/web/image/product.template/5449/image_1024?unique=580e042'), // Reemplaza con la URL de tu imagen
+              'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'), // Reemplaza con la URL de tu imagen
           radius: 20.0,
         ),
         SizedBox(width: 10),
@@ -27,7 +32,7 @@ class _MenuUsuarioState extends State<MenuUsuario> {
           tablet: false,
         ))
           Text(
-            'Maria Fernanda Quintana',
+            provider.nombreUsuario,
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
                   color: FlutterFlowTheme.of(context).primaryText,
@@ -41,7 +46,8 @@ class _MenuUsuarioState extends State<MenuUsuario> {
             // Acción al seleccionar una opción
             if (value == 'logout') {
               // Implementa la funcionalidad de cerrar sesión aquí
-              print('Cerrar sesión');
+              cerrarSesion();
+              Navigator.pushNamed(context, "/Auth");
             }
           },
           itemBuilder: (BuildContext context) => <PopupMenuEntry>[
